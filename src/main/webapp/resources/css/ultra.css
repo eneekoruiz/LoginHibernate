@@ -1,0 +1,640 @@
+/* ===============================
+   ULTRA.CSS - ESTILO GLOBAL
+   Para Register, Home y Create Ride
+   =============================== */
+
+/* ---- Fondo general ---- */
+.body-bg {
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(135deg, #0e1118 0%, #1a1f29 100%);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Luz de fondo animada */
+.glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(99, 140, 255,0.3), transparent 70%),
+                radial-gradient(circle at 70% 70%, rgba(62, 143, 255,0.3), transparent 70%);
+    z-index: 0;
+    animation: float 6s ease-in-out infinite alternate;
+}
+@keyframes float {
+    from { transform: translate(0, -30px); }
+    to   { transform: translate(0, 30px); }
+}
+
+/* ---- Card Glassmorphism ---- */
+.card {
+    width: 500px;
+    background: rgba(255,255,255,0.08);
+    padding: 40px 36px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    backdrop-filter: blur(18px);
+    animation: elevate 0.7s ease both;
+    position: relative;
+    z-index: 1;
+}
+@keyframes elevate {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+/* ---- Header / Logo ---- */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.logo {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #62bbff, #3d8fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 32px;
+    color: #061322;
+    box-shadow: 0 12px 25px rgba(62,150,255,0.35);
+}
+.header h1 {
+    color: #eef6ff;
+    font-size: 28px;
+    margin: 0;
+}
+.header p {
+    color: #b6c9e7;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+/* ---- Campos ---- */
+.field {
+    margin-bottom: 20px;
+}
+.field label {
+    color: #d4e1f9;
+    margin-bottom: 6px;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+}
+.input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ecf3ff;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+.input:focus {
+    border-color: #62bbff;
+    box-shadow: 0 0 12px rgba(98,187,255,0.35);
+    outline: none;
+}
+
+/* ---- Calendar Container ---- */
+.calendar-container {
+    padding: 10px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ---- Botones ---- */
+.btn {
+    padding: 12px 30px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 10px 20px rgba(62,150,255,0.25);
+}
+.btn-primary {
+    background: linear-gradient(90deg,#62bbff,#3d8fff,#6e8bff);
+    color: #061322;
+    background-size: 200% 100%;
+}
+.btn-primary:hover {
+    background-position: 100% 0;
+    transform: translateY(-2px);
+}
+.btn-secondary {
+    background: linear-gradient(90deg,#b5b5b5,#dddddd);
+    color: #061322;
+}
+.btn-secondary:hover {
+    transform: translateY(-2px);
+}
+
+/* ---- Mensajes ---- */
+.msg {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #ff6b6b;
+}
+.msgs {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ffbaba;
+}
+
+/* ---- Link ---- */
+.login-link {
+    text-align: center;
+    margin-top: 18px;
+}
+.login-link a {
+    color: #8fbeff;
+    text-decoration: none;
+    transition: .2s;
+}
+.login-link a:hover {
+    color: #cfe4ff;
+    text-decoration: underline;
+}
+
+/* ---- Home Page ---- */
+.home-card {
+    width: 480px;
+    text-align: center;
+}
+.home-buttons .btn {
+    margin-bottom: 10px;
+}
+
+/* ---- Inputs con iconos opcionales ---- */
+.input-icon {
+    position: relative;
+}
+.input-icon i {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* ---- Responsivo ---- */
+@media screen and (max-width: 600px){
+    .card { width: 90%; padding: 30px; }
+    .input { font-size: 14px; padding: 10px 12px; }
+    .btn { font-size: 15px; padding: 10px; }
+}
+
+/* ======= LAYOUT GLOBAL PARA LA PLANTILLA ======= */
+
+.layout-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-small {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 10px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #62bbff, #3d8fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 26px;
+    color: #061322;
+    box-shadow: 0 8px 18px rgba(62,150,255,0.3);
+}
+
+.app-title {
+    color: #eef6ff;
+    font-size: 22px;
+    margin: 0;
+}
+
+.content-slot {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #b6c9e7;
+    font-size: 14px;
+}
+
+/* ====== EXTRAS PARA PRIMEFACES EN ULTRA.css ====== */
+
+.form .ui-inputtext,
+.form .ui-inputnumber input {
+    width: 100% !important;
+    padding: 12px 15px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ecf3ff;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.form .ui-inputtext:focus,
+.form .ui-inputnumber input:focus {
+    border-color: #62bbff;
+    box-shadow: 0 0 12px rgba(98,187,255,0.35);
+    outline: none;
+}
+
+/* Calendario PrimeFaces inline */
+.ui-datepicker-inline {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 15px !important;
+    border-radius: 12px !important;
+    color: #ecf3ff !important;
+}
+
+.ui-datepicker-header {
+    background: rgba(255,255,255,0.08) !important;
+    border: none !important;
+    color: #ecf3ff !important;
+}
+
+.ui-state-default {
+    background: rgba(255,255,255,0.1) !important;
+    border-radius: 6px !important;
+    color: #ecf3ff !important;
+}
+
+.ui-state-hover {
+    background: rgba(255,255,255,0.2) !important;
+}
+
+.ui-state-active {
+    background: #62bbff !important;
+    color: #061322 !important;
+    font-weight: bold !important;
+}
+
+/* ===== SCROLL PARA CONTENIDO LARGO ===== */
+.scroll-area {
+    max-height: 78vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Scroll fino y elegante */
+.scroll-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+
+.page-columns {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+/* =========================================
+   AÑADIDO PARA BOOKRIDE (Tabla y Ancho)
+   ========================================= */
+
+/* Permitir que la tarjeta se expanda en pantallas grandes */
+.card.full-width {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+}
+
+/* Estilo para la DataTable de PrimeFaces (Transparente y Moderna) */
+.ui-datatable {
+    background: transparent !important;
+}
+
+.ui-datatable .ui-datatable-header,
+.ui-datatable .ui-paginator {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: #ecf3ff !important;
+}
+
+.ui-datatable thead th {
+    background: rgba(62, 143, 255, 0.2) !important;
+    color: #ecf3ff !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    text-align: center;
+    padding: 12px !important;
+}
+
+.ui-datatable tbody td {
+    background: rgba(255,255,255,0.02) !important;
+    color: #d4e1f9 !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+    text-align: center;
+}
+
+.ui-datatable tbody tr.ui-state-highlight {
+    background: rgba(98, 187, 255, 0.25) !important;
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+.ui-datatable .ui-column-title {
+    font-weight: bold;
+}
+
+/* Ajustes para inputs dentro de grids */
+.ui-panelgrid .ui-panelgrid-cell {
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 10px;
+}
+
+.ride-full {
+    background-color: rgba(255, 99, 71, 0.2) !important; /* Gorri argia */
+    color: #ffcccc !important;
+    pointer-events: none; /* Ezin da klikatu */
+    opacity: 0.7;
+}
+/* Estilo para filas de la tabla cuando nPlaces es 0 */
+.ride-full {
+    background-color: rgba(255, 99, 71, 0.15) !important; /* Rojo suave */
+    color: #ffbaba !important;
+    text-decoration: line-through; /* Opcional: tachar texto */
+    opacity: 0.7;
+}
+
+/* Estilo para el texto "AGOTADO" */
+.sold-out-badge {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+/* ============================================================
+   PRIMEFACES DARK MODE OVERRIDES (MODERNO)
+   ============================================================ */
+
+/* --- 1. Eliminar bordes y fondos por defecto de PrimeFaces --- */
+.ui-widget-content, 
+.ui-widget-header,
+.ui-panelgrid .ui-panelgrid-cell {
+    background: transparent !important;
+    border: none !important;
+    color: #ecf3ff !important;
+    text-shadow: none !important;
+}
+
+/* --- 2. Inputs (Select, Calendar, Spinner) --- */
+.body-bg .ui-inputfield, 
+.body-bg .ui-selectonemenu,
+.body-bg .ui-spinner-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    padding: 8px 12px !important;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+}
+
+.body-bg .ui-inputfield:focus, 
+.body-bg .ui-selectonemenu.ui-state-focus {
+    border-color: #62bbff !important;
+    box-shadow: 0 0 10px rgba(98, 187, 255, 0.2) !important;
+}
+
+/* Iconos de los inputs (flechas) */
+.ui-selectonemenu .ui-selectonemenu-trigger,
+.ui-spinner .ui-spinner-button {
+    background: transparent !important;
+    border: none !important;
+    color: #62bbff !important;
+}
+.ui-icon {
+    filter: invert(1) brightness(2); /* Hacer iconos blancos/brillantes */
+}
+
+/* Dropdown del SelectOneMenu (La lista desplegable) */
+.ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
+    background: #1a1f29 !important;
+    border: 1px solid #62bbff !important;
+}
+.ui-selectonemenu-item {
+    color: #fff !important;
+}
+.ui-selectonemenu-item.ui-state-highlight {
+    background: #62bbff !important;
+    color: #000 !important;
+}
+
+/* --- 3. Tabla Moderna (DataTable) --- */
+.my-table .ui-datatable-header {
+    background: rgba(255,255,255,0.05) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    text-align: left;
+    padding: 15px !important;
+}
+
+.my-table thead th {
+    background: rgba(62, 143, 255, 0.15) !important;
+    color: #62bbff !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 12px !important;
+    border: none !important;
+}
+
+.my-table tbody td {
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    padding: 15px 10px !important;
+}
+
+/* Hover en filas */
+.my-table tbody tr:hover {
+    background: rgba(255,255,255,0.05) !important;
+    cursor: pointer;
+}
+
+/* Fila seleccionada */
+.my-table tbody tr.ui-state-highlight {
+    background: rgba(98, 187, 255, 0.2) !important;
+    color: #fff !important;
+    border-left: 4px solid #62bbff;
+}
+
+/* --- 4. Sección de Reserva (Highlight) --- */
+.booking-section {
+    margin-top: 20px;
+    background: linear-gradient(135deg, rgba(98, 187, 255, 0.1) 0%, rgba(98, 187, 255, 0.02) 100%);
+    border: 1px solid rgba(98, 187, 255, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Layout helpers */
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    align-items: end; /* Alinear botón con inputs */
+    margin-bottom: 30px;
+}
+.full-screen-card {
+    max-width: 1100px;
+    width: 95%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+}
+.scroll-content {
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+
+
+/* --- ESTILOS PARA EL DIALOGO (MODAL) --- */
+.ui-dialog {
+    background: #1a1f29 !important;
+    border: 1px solid rgba(98, 187, 255, 0.3) !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+    border-radius: 15px !important;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    padding: 20px !important;
+}
+
+.ui-dialog .ui-dialog-title {
+    color: #fff !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
+.ui-dialog .ui-dialog-content {
+    background: transparent !important;
+    color: #fff !important;
+    padding: 30px !important;
+}
+
+/* PRIMEFACES: forzar fondo sólido en widgets para evitar que desaparezcan al grabar pantalla */
+.ui-inputfield, 
+.ui-spinner-input,
+.ui-inputnumber,
+.ui-inputnumber-input,
+.ui-calendar {
+    background: rgba(25,25,25,0.9) !important;  /* casi igual que tu estilo, pero opaco */
+    color: white !important;
+}
+
+/* Dropdowns nativos (cuando existan) */
+select, select option {
+    background: rgba(20,20,20,0.95) !important;
+    color: white !important;
+}
+
+/* Botón de cerrar (X) */
+.ui-dialog .ui-dialog-titlebar-close {
+    background: rgba(255,255,255,0.1) !important;
+    color: #fff !important;
+    transition: all 0.2s;
+}
+.ui-dialog .ui-dialog-titlebar-close:hover {
+    background: #ff6b6b !important;
+}    /* Contenedor principal dividido */
+    .split-layout {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start; /* Alinear arriba */
+        height: 100%;
+        overflow: hidden; /* Evitar scroll doble */
+    }
+
+    /* La tabla ocupa todo el espacio por defecto */
+    .table-container {
+        flex: 1;
+        transition: all 0.3s ease;
+        min-width: 0; /* Truco para que flexbox no rompa tablas */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* El panel lateral de reserva */
+    .booking-sidebar {
+        width: 350px; /* Ancho fijo para el panel lateral */
+        flex-shrink: 0;
+        animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Ajustar el formulario dentro del panel lateral para que sea vertical */
+    .sidebar-form .field {
+        margin-bottom: 15px;
+    }
+    
+    .sidebar-form .ui-outputlabel {
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    /* Animación de entrada */
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    /* Si no hay reserva seleccionada, el panel ocupa 0 espacio (manejado por JSF rendered) */

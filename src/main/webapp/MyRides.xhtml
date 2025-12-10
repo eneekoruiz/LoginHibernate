@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Nire Bidaiak (Gestionar)</title>
+    <h:outputStylesheet library="css" name="ultra.css" />
+    <style>
+        .body-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; height: 100vh; margin: 0; overflow: hidden; font-family: sans-serif; }
+        .full-screen-card { width: 95% !important; height: 94vh !important; margin: 3vh auto !important; background: rgba(30, 41, 59, 0.7); border-radius: 16px; padding: 25px; display: flex; flex-direction: column; }
+        .btn-danger { background: rgba(239, 68, 68, 0.15) !important; border: 1px solid rgba(239, 68, 68, 0.3) !important; color: #f87171 !important; font-weight: bold !important; }
+        .btn-danger:hover { background: rgba(239, 68, 68, 0.3) !important; color: #fff !important; }
+        .btn-secondary { background: transparent !important; border: 1px solid #475569 !important; color: #cbd5e1 !important; }
+    </style>
+</h:head>
+
+<h:body styleClass="body-bg">
+    <div class="card full-screen-card">
+        <h:form id="form" style="display: flex; flex-direction: column; height: 100%;">
+            <p:growl id="msgs" showDetail="true" />
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: white; margin:0;">🚗 Nire Bidaiak Kudeatu</h2>
+                <p:commandButton value="Atzera" action="back" styleClass="btn-secondary" />
+            </div>
+
+            <div style="flex: 1; overflow: hidden; border-radius: 12px; border: 1px solid #334155;">
+                <p:dataTable id="ridesTable" var="ride" value="#{myRidesBean.myRides}" 
+                             reflow="true" scrollable="true" scrollHeight="100%"
+                             emptyMessage="Ez duzu bidaiarik sortu oraindik.">
+
+                    <p:column headerText="Nontik" sortBy="#{ride.from}">
+                        <h:outputText value="#{ride.from}" style="font-weight:bold; color:white;"/>
+                    </p:column>
+
+                    <p:column headerText="Nora" sortBy="#{ride.to}">
+                        <h:outputText value="#{ride.to}" style="font-weight:bold; color:white;"/>
+                    </p:column>
+
+                    <p:column headerText="Data" sortBy="#{ride.date}" style="text-align: center;">
+                        <h:outputText value="#{ride.date}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Prezioa" sortBy="#{ride.price}" style="text-align: right;">
+                        <h:outputText value="#{ride.price} €" style="color:#10b981; font-weight:bold;"/>
+                    </p:column>
+
+                    <p:column headerText="Plazas Libres" style="text-align: center;">
+                         #{ride.nPlaces}
+                    </p:column>
+
+                    <p:column headerText="Ekintzak" style="text-align: center; width: 120px;">
+                        <p:commandButton icon="pi pi-trash" 
+                                         action="#{myRidesBean.deleteRide(ride)}"
+                                         update="ridesTable :form:msgs"
+                                         styleClass="btn-danger"
+                                         title="Ezabatu Bidaia">
+                            <p:confirm header="Ezabatu" message="Ziur? Erreserbak ere ezabatuko dira." icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350"
+                             style="background: #1e293b; color: #fff;">
+                <p:commandButton value="Ez" type="button" styleClass="ui-confirmdialog-no btn-secondary" />
+                <p:commandButton value="Bai, ezabatu" type="button" styleClass="ui-confirmdialog-yes btn-danger" />
+            </p:confirmDialog>
+        </h:form>
+    </div>
+</h:body>
+</html>

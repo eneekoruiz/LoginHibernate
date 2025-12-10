@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Ruleta de la Suerte</title>
+    <h:outputStylesheet library="css" name="ultra.css" /> 
+    
+    <style>
+        body {
+            background: #0f172a; /* Azul oscuro elegante */
+            color: white; 
+            font-family: 'Segoe UI', sans-serif; 
+            text-align: center;
+        }
+
+        /* CONTENEDOR DE LA RULETA */
+        .game-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 40px auto;
+        }
+
+        /* LA FLECHA (Marcador) */
+        .stopper {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; 
+            height: 0; 
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 35px solid #ef4444; /* Flecha Roja */
+            z-index: 20;
+            filter: drop-shadow(0 4px 2px rgba(0,0,0,0.5));
+        }
+
+        /* EL DISCO QUE GIRA */
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid #facc15; /* Borde Dorado */
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
+            position: relative;
+            overflow: hidden;
+            /* La transición CSS hace la magia del giro suave */
+            transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1); 
+            
+            /* DIBUJO DE LOS QUESITOS (6 Segmentos) */
+            background: conic-gradient(
+                #334155 0deg 60deg,    /* 0: PERDER (Gris) */
+                #3b82f6 60deg 120deg,  /* 1: PLATA (Azul) */
+                #334155 120deg 180deg, /* 2: PERDER (Gris) */
+                #eab308 180deg 240deg, /* 3: ORO (Dorado) */
+                #334155 240deg 300deg, /* 4: PERDER (Gris) */
+                #3b82f6 300deg 360deg  /* 5: PLATA (Azul) */
+            );
+        }
+
+        /* TEXTOS DENTRO DE LA RULETA */
+        .label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+            width: 50%; /* Radio */
+            padding-left: 20px; /* Separar del centro */
+            box-sizing: border-box;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        /* Rotamos las etiquetas para que queden en su quesito */
+        /* Ajuste: (AnguloInicio + MitadQuesito) - 90grados */
+        .l0 { transform: rotate(-60deg) translate(0, -50%) rotate(0deg); } /* Ajuste manual visual */
+        /* Mejor sistema: Posicionar elementos absolutos rotados */
+        
+        .segment-text {
+            position: absolute;
+            width: 100px;
+            top: 20px; /* Ajustar distancia al borde */
+            left: 50%;
+            margin-left: -50px;
+            text-align: center;
+            transform-origin: 50% 130px; /* Pivotar sobre el centro de la rueda (radio 150 - 20) */
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Rotación de textos para que coincidan con los colores */
+        /* 0 (0-60): +30deg */
+        .t0 { transform: rotate(30deg);  color: #94a3b8; } /* Perder */
+        .t1 { transform: rotate(90deg);  color: white; }   /* Plata */
+        .t2 { transform: rotate(150deg); color: #94a3b8; } /* Perder */
+        .t3 { transform: rotate(210deg); color: black; font-weight: 900; } /* ORO */
+        .t4 { transform: rotate(270deg); color: #94a3b8; } /* Perder */
+        .t5 { transform: rotate(330deg); color: white; }   /* Plata */
+
+        .center-circle {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 50px; height: 50px;
+            background: white;
+            border: 4px solid #facc15;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .pi-star-fill { color: #eab308; }
+    </style>
+
+    <script>
+        function handleSpinResult(xhr, status, args) {
+            // Recibimos los grados desde Java
+            var degrees = args.deg;
+            var wheel = document.getElementById('wheel');
+            
+            // Aplicamos la rotación CSS
+            // El navegador animará esto automáticamente por la propiedad 'transition'
+            wheel.style.transform = "rotate(" + degrees + "deg)";
+            
+            // Esperamos 4 segundos (lo que dura la transición) para mostrar el resultado
+            setTimeout(function() {
+                PF('dlgResult').show();
+            }, 4000);
+        }
+    </script>
+</h:head>
+
+<h:body>
+
+    <h1>🎡 Eguneko Ruleta</h1>
+
+    <h:form id="formGame" prependId="false">
+        
+        <div class="game-container">
+            <div class="stopper"></div>
+
+            <div id="wheel" class="wheel">
+                <div class="segment-text t0"><i class="pi pi-times"></i><br/>Ez</div>
+                <div class="segment-text t1">10%<br/>DTO</div>
+                <div class="segment-text t2"><i class="pi pi-times"></i><br/>Ez</div>
+                <div class="segment-text t3">50%<br/>JACKPOT</div>
+                <div class="segment-text t4"><i class="pi pi-times"></i><br/>Ez</div>
+                <div class="segment-text t5">10%<br/>DTO</div>
+            </div>
+            
+            <div class="center-circle">
+                <i class="pi pi-star-fill" style="font-size: 1.5rem;"></i>
+            </div>
+        </div>
+
+        <p style="margin-bottom: 20px; font-size: 1.1rem; color: #ccc;">
+            Sakatu botoia eta itxaron (Dale al botón y espera)
+        </p>
+
+        <p:commandButton value="#{rouletteBean.alreadySpun ? 'Bihar gehiago' : 'JOKATU'}" 
+                         action="#{rouletteBean.spinWheel}"
+                         oncomplete="handleSpinResult(xhr, status, args)"
+                         update="resultPanel"
+                         disabled="#{rouletteBean.alreadySpun}"
+                         styleClass="ui-button-warning"
+                         style="font-size: 1.4rem; padding: 5px 40px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 10px #facc15;"/>
+
+        <h:panelGroup id="resultPanel">
+            <p:dialog widgetVar="dlgResult" modal="true" header="Emaitza" showEffect="bounce" hideEffect="fade" draggable="false" resizable="false">
+                <div style="text-align: center; padding: 20px;">
+                    <i class="#{rouletteBean.lastWonCoupon != null ? 'pi pi-check-circle' : 'pi pi-times-circle'}" 
+                       style="font-size: 3rem; color: #{rouletteBean.lastWonCoupon != null ? '#10b981' : '#ef4444'}; margin-bottom: 15px;"></i>
+                    
+                    <h3>#{rouletteBean.resultMessage}</h3>
+                    
+                    <h:panelGroup rendered="#{rouletteBean.lastWonCoupon != null}">
+                         <div style="background: #eab308; color: black; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 1.4rem; border: 2px dashed black;">
+                            #{rouletteBean.lastWonCoupon.code}
+                         </div>
+                    </h:panelGroup>
+
+                    <br/>
+                    <p:commandButton value="Itxi" onclick="PF('dlgResult').hide()" type="button" styleClass="ui-button-outlined"/>
+                </div>
+            </p:dialog>
+            
+            <br/><br/>
+            
+            <p:dataTable value="#{rouletteBean.myCoupons}" var="c" rendered="#{not empty rouletteBean.myCoupons}"
+                         style="max-width: 500px; margin: 0 auto; font-size: 0.9rem;">
+                <p:column headerText="Zure Sariak">
+                    <span style="color: #eab308; font-weight: bold;">#{c.code}</span> - #{c.description}
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+
+    </h:form>
+
+</h:body>
+</html>

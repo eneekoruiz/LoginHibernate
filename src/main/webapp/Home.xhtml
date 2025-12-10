@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Hasiera — Rides</title>
+    <h:outputStylesheet library="css" name="ultra.css" />
+</h:head>
+
+<h:body class="body-bg">
+
+    <div class="glow"></div>
+
+    <div class="card home-card">
+
+        <div class="header">
+            <div class="logo">R</div>
+            <h1>Rides</h1>
+            <p>Kaixo, #{sessionManager.currentUser.name}!</p>
+            <p style="font-size: 0.9em; opacity: 0.7;">Zer egin nahi duzu gaur?</p>
+        </div>
+
+        <h:form class="form home-buttons">
+
+            <h:commandButton 
+                value="🚗 Sortu bidaia"
+                action="CreateRide"
+                rendered="#{sessionManager.currentUser.driver}"
+                styleClass="btn" />
+
+            <h:commandButton 
+    value="🔍 Bilatu bidaiak"
+    action="QueryRides"
+    rendered="#{sessionManager.currentUser.traveler or sessionManager.currentUser.driver}"
+    styleClass="btn btn-secondary" />
+            
+            <h:commandButton 
+                value="🎟️ Erreserbatu"
+                action="BookRide"
+                rendered="#{sessionManager.currentUser.traveler}"
+                styleClass="btn btn-accent" />
+
+            <h:commandButton 
+                value="📋 Nire Erreserbak"
+                action="QueryReservations"
+                rendered="#{sessionManager.currentUser.traveler}"
+                styleClass="btn btn-secondary" 
+                style="border-color: #10b981; color: #10b981;" />
+			<h:commandButton 
+			    value="🗑️ Kudeatu Nire Bidaiak"
+			    action="MyRides"
+			    rendered="#{sessionManager.currentUser.driver}"
+			    styleClass="btn btn-secondary" 
+			    style="border-color: #f59e0b; color: #f59e0b;" />
+            <h:commandButton 
+                value="🚪 Saioa Itxi (Logout)" 
+                action="#{sessionManager.logout}" 
+                styleClass="btn"
+                style="margin-top: 20px; background: transparent; border: 1px solid #ef4444; color: #ef4444;" />
+                
+                
+        </h:form>
+
+    </div>
+
+</h:body>
+</html>

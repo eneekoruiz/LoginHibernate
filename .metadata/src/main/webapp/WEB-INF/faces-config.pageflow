@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf17634851158120" configfile="/Rides24JSF/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Home.xhtml" x="122" y="1330" id="pf17637463173064" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf17649460112382 pf17649460112383" path="/Home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Login.xhtml" x="122" y="946" id="pf17637463596696" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf17649460112384" path="/Login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Home.xhtml?faces-redirect=true" x="338" y="562" id="pf17649460112385" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf17649460112384 pf176494653048312 pf176494653048313 pf176494653048314 pf176495476397418 pf17650441461710" path="/Home.xhtml?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="CreateRide.xhtml?faces-redirect=true" x="338" y="1138" id="pf17649460112386" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf17649460112382" path="/CreateRide.xhtml?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="QueryRides.xhtml?faces-redirect=true" x="338" y="1522" id="pf17649460112387" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf17649460112383" path="/QueryRides.xhtml?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="CreateRide.xhtml" id="pf176494653048315" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf176494653048312" path="/CreateRide.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="QueryRides.xhtml" id="pf176494653048316" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf176494653048313" path="/QueryRides.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Back from BookRide" id="pf176494653048317" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf176494653048314" path="/BookRide.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="QueryReservations.xhtml" id="pf176495476397519" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf176495476397418 pf17650441461710" path="/QueryReservations.xhtml"/>
+  <links id="pf17649460112384" target="pf17649460112385" source="pf17637463596696" outcome="ok"/>
+  <links id="pf17649460112382" target="pf17649460112386" source="pf17637463173064" outcome="1"/>
+  <links id="pf17649460112383" target="pf17649460112387" source="pf17637463173064" outcome="2"/>
+  <links id="pf176494653048312" target="pf17649460112385" source="pf176494653048315" outcome="back"/>
+  <links id="pf176494653048313" target="pf17649460112385" source="pf176494653048316" outcome="back"/>
+  <links id="pf176494653048314" target="pf17649460112385" source="pf176494653048317" outcome="back"/>
+  <links id="pf176495476397418" target="pf17649460112385" source="pf176495476397519" outcome="back"/>
+  <links id="pf17650441461710" target="pf17649460112385" source="pf176495476397519" outcome="back"/>
+</pageflow:Pageflow>

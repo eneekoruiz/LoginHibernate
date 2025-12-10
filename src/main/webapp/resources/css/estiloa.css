@@ -1,0 +1,107 @@
+/* modern.css — diseño original, "realista" y moderno */
+
+/* page bg */
+.page-bg {
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 40px 20px;
+  background: radial-gradient(1200px 400px at 10% 10%, rgba(138,180,248,0.07), transparent 10%),
+              linear-gradient(135deg, #0f1720 0%, #121417 35%, #1c1f22 100%);
+  color: #e6eef6;
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* card */
+.card-wrapper {
+  width: 420px;
+  max-width: 94%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+
+/* brand */
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+.logo {
+  width:56px;
+  height:56px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#8ab4f8,#4a90e2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:22px;
+  color:#071428;
+  box-shadow: 0 6px 18px rgba(74,144,226,0.18);
+}
+.brand h1{ margin:0; font-size:18px; letter-spacing:0.2px; }
+.brand span{ display:block; font-size:12px; color:#9fb0c8; }
+
+/* form */
+.form { display:block; }
+.row { margin-bottom:14px; }
+.row label{ display:block; color:#bfcfe0; font-size:13px; margin-bottom:6px; }
+.input {
+  width:100%;
+  padding:11px 12px;
+  border-radius:10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(12,15,18,0.6);
+  color: #e7f0fb;
+  font-size:14px;
+  transition: box-shadow .18s ease, border-color .18s ease, transform .06s;
+}
+.input:focus {
+  outline:none;
+  border-color: rgba(138,180,248,0.8);
+  box-shadow: 0 6px 20px rgba(74,144,226,0.12);
+  transform: translateY(-1px);
+}
+
+/* password wrapper */
+.pw-wrap{ display:flex; gap:8px; align-items:center; }
+.pw { flex:1; }
+.pw-toggle {
+  padding: 8px 10px;
+  border-radius:8px;
+  border: none;
+  background: rgba(255,255,255,0.03);
+  color: #9fb0c8;
+  cursor:pointer;
+  font-size:13px;
+}
+.pw-toggle:hover{ color:white; background: rgba(255,255,255,0.04); }
+
+/* buttons */
+.btn { display:inline-block; width:100%; padding:12px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:600; font-size:15px; }
+.btn.primary {
+  background: linear-gradient(90deg,#6fb3ff,#4a90e2);
+  color:#071428;
+  box-shadow: 0 10px 24px rgba(74,144,226,0.14);
+}
+.btn.primary:hover { filter:brightness(1.06); transform:translateY(-2px); }
+
+/* messages */
+.msgs { margin-top:8px; color:#ffd9d0; font-size:13px; }
+.field-msg { color:#ffb3ab; font-size:12px; margin-top:6px; }
+
+/* small link */
+.small-link a { color:#9fb0c8; font-size:13px; text-decoration:none; }
+.small-link a:hover { color:#dcecff; text-decoration:underline; }
+
+/* responsive */
+@media (max-width:480px){
+  .card-wrapper{ padding:18px; border-radius:12px; }
+  .logo{ width:48px; height:48px; font-size:20px; }
+}

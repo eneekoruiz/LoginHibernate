@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+	https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+	version="6.0">
+
+	<display-name>Rides24JSF</display-name>
+
+	<context-param>
+		<param-name>jakarta.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>jakarta.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>primefaces.UPLOADER</param-name>
+		<param-value>native</param-value>
+	</context-param>
+	
+	<context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>nova-light</param-value>
+    </context-param>
+
+
+	<listener>
+		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>Login.xhtml</welcome-file>
+	</welcome-file-list>
+
+
+	<error-page>
+		<exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+		<location>/Login.xhtml?faces-redirect=true</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/Login.xhtml?faces-redirect=true</location>
+	</error-page>
+
+</web-app>

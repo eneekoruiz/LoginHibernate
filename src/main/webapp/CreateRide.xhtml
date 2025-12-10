@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Create Ride — Rides</title>
+    <h:outputStylesheet library="css" name="ultra.css" />
+
+    <style>
+select {
+    background: rgba(20, 20, 20, 0.75); 
+}
+        /* CARD MÁS ANCHA */
+        .card {
+            max-width: 1000px;
+            width: 90%;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 80px); /* ocupa casi toda pantalla */
+        }
+
+        /* HEADER NO SCROLLEA */
+        .header {
+            flex-shrink: 0;
+        }
+
+        /* SCROLL SOLO EN CAMPOS, NO BOTONES */
+        .scroll-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Estilo scrollbar */
+        .scroll-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scroll-wrapper::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        /* GRID DE FORMULARIO */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        /* FOOTER FIJO DENTRO DE LA CARD */
+        .footer-buttons {
+            flex-shrink: 0;
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    </style>
+</h:head>
+
+<h:body class="body-bg">
+
+    <div class="glow"></div>
+
+    <div class="card">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">R</div>
+            <h1>Create Ride</h1>
+            <p>Fill the fields to publish your ride</p>
+        </div>
+
+        <!-- SCROLL SOLO EN LOS CAMPOS -->
+        <div class="scroll-wrapper">
+
+            <h:form id="form">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <h:outputLabel value="Depart City" for="departCity" />
+                        <p:inputText id="departCity"
+                                     value="#{createRidesBean.departCity}"
+                                     styleClass="input"
+                                     placeholder="Enter departure city" />
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Arrival City" for="arrivalCity" />
+                        <p:inputText id="arrivalCity"
+                                     value="#{createRidesBean.arrivalCity}"
+                                     styleClass="input"
+                                     placeholder="Enter arrival city" />
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Number of Seats" for="seats" />
+
+					<p:spinner id="seats"
+					           value="#{createRidesBean.seats}"
+					           min="1" 
+					           max="8"
+					           readonlyInput="true"
+					           onkeydown="return false;"
+					           styleClass="input" />
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Price (€)" for="price" />
+                        <p:inputNumber id="price"
+                                       value="#{createRidesBean.price}"
+                                       minValue="0" maxValue="1000"
+                                       decimalPlaces="2"
+                                       styleClass="input" />
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Driver Email" for="email" />
+                        <p:inputText id="email"
+                                     value="#{createRidesBean.email}"
+                                     styleClass="input"
+                                     readonly="true"
+                                     placeholder="Enter your email" />
+                    </div>
+
+                    <div class="section-title full-width">Ride Date</div>
+
+                    <div class="calendar-container full-width">
+                        <p:calendar id="data"
+                                    value="#{createRidesBean.data}"
+                                    mode="inline"
+                                    inline="true"
+                                    timeZone="Europe/Madrid"
+                                    style="width:100%;" />
+                    </div>
+
+                    <p:messages autoUpdate="true"
+                                styleClass="msgs full-width" />
+
+                    <h:outputText value="#{createRidesBean.message}"
+                                  style="color:#ff6b6b;font-weight:bold;"
+                                  class="full-width" />
+
+                </div>
+
+                <!-- BOTONES SIEMPRE VISIBLES -->
+                <div class="footer-buttons">
+                    <p:commandButton value="Create Ride"
+                                     action="#{createRidesBean.createRide}"
+                                     update="@form"
+                                     styleClass="btn btn-primary" />
+
+                    <p:commandButton value="Close"
+                                     action="back"
+                                     styleClass="btn btn-secondary" />
+                </div>
+
+            </h:form>
+
+        </div>
+
+    </div>
+
+</h:body>
+</html>

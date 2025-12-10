@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/facelets/templates/Txantiloia.xhtml">
+
+    <!-- Título -->
+    <ui:define name="izenburua">
+        Saioa Hasi — Rides
+    </ui:define>
+
+    <!-- Contenido -->
+    <ui:define name="gorputza">
+
+        <!-- Fondo animado -->
+        <div class="glow"></div>
+
+        <!-- Card -->
+        <div class="card">
+
+            <div class="header">
+                <div class="logo">R</div>
+                <h1>Saioa Hasi</h1>
+                <p>Sartu zure datuak</p>
+            </div>
+
+            <h:form id="loginForm">
+
+                <!-- IZENA -->
+                <div class="field">
+                    <label for="izen">Email</label>
+                    <h:inputText id="izen"
+                                 value="#{login.email}"
+                                 styleClass="input"
+                                 required="true" />
+                    <h:message for="izen" styleClass="msg" />
+                </div>
+
+                <!-- PASAHITZA -->
+                <div class="field">
+                    <label for="pass">Pasahitza</label>
+                    <h:inputSecret id="pass"
+                                   value="#{login.password}"
+                                   styleClass="input"
+                                   redisplay="true"
+                                   required="true">
+                        <f:validateLength minimum="1" maximum="500" />
+                    </h:inputSecret>
+                    <h:message for="pass" styleClass="msg" />
+                </div>
+
+                <!-- BOTÓN -->
+                <h:commandButton value="Saioa hasi"
+                                 action="#{login.egiaztatu}"
+                                 styleClass="btn btn-primary" />
+                                 <p>
+    Ez duzu konturik? 
+	<h:commandButton action="Register" 
+                 value="Erregistratu hemen" 
+                 immediate="true" 
+                 process="@this"
+                 styleClass="btn btn-secondary"/>
+                 </p>
+
+                <!-- MENSAJES -->
+                <h:messages styleClass="msgs" />
+
+            </h:form>
+
+        </div>
+<!-- En Login.xhtml -->
+
+    </ui:define>
+
+</ui:composition>
+</html>

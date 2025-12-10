@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
+	version="3.0">
+
+    <navigation-rule>
+		<display-name>Login.xhtml</display-name>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>ok</from-outcome>
+			<to-view-id>/Home.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+    <navigation-rule>
+		<display-name>Home.xhtml</display-name>
+		<from-view-id>/Home.xhtml</from-view-id>
+		
+        <navigation-case>
+			<from-outcome>1</from-outcome>
+			<to-view-id>/CreateRide.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+        
+        <navigation-case>
+			<from-outcome>CreateRide</from-outcome>
+			<to-view-id>/CreateRide.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+
+        <navigation-case>
+			<from-outcome>2</from-outcome>
+			<to-view-id>/QueryRides.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+
+        <navigation-case>
+			<from-outcome>QueryRides</from-outcome>
+			<to-view-id>/QueryRides.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+
+        <navigation-case>
+            <from-outcome>BookRide</from-outcome>
+            <to-view-id>/BookRide.xhtml?faces-redirect=true</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>QueryReservations</from-outcome>
+            <to-view-id>/QueryReservations.xhtml?faces-redirect=true</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>MyRides</from-outcome>
+            <to-view-id>/MyRides.xhtml?faces-redirect=true</to-view-id>
+        </navigation-case>
+	</navigation-rule>
+
+    <navigation-rule>
+        <display-name>Back from BookRide</display-name>
+        <from-view-id>/BookRide.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>/Home.xhtml?faces-redirect=true</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/CreateRide.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>back</from-outcome>
+			<to-view-id>/Home.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/QueryRides.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>back</from-outcome>
+			<to-view-id>/Home.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/QueryReservations.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>back</from-outcome>
+			<to-view-id>/Home.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/MyRides.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>/Home.xhtml?faces-redirect=true</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+</faces-config>

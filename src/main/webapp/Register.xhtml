@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Erregistratu — Rides</title>
+    <h:outputStylesheet library="css" name="ultra.css" />
+    <style>
+        .pw-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .pw-toggle {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+        /* PRIMEFACES: forzar fondo sólido en widgets para evitar que desaparezcan al grabar pantalla */
+.ui-inputfield, 
+.ui-spinner-input,
+.ui-inputnumber,
+.ui-inputnumber-input,
+.ui-calendar {
+    background: rgba(25,25,25,0.9) !important;  /* casi igual que tu estilo, pero opaco */
+    color: white !important;
+}
+
+/* Dropdowns nativos (cuando existan) */
+select, select option {
+    background: rgba(20,20,20,0.95) !important;
+    color: white !important;
+}
+        
+        </style>
+</h:head>
+
+<h:body class="body-bg">
+
+    <div class="glow"></div>
+
+    <div class="card">
+        <div class="header">
+            <div class="logo">R</div>
+            <h1>Rides</h1>
+            <p>Sortu zure kontua</p>
+        </div>
+
+        <h:form id="registerForm" class="form">
+
+            <div class="field">
+                <label for="username">Izena / Erabiltzailea</label>
+                <h:inputText id="username" value="#{registerBean.username}" required="true" styleClass="input" />
+                <h:message for="username" styleClass="msg" />
+            </div>
+
+            <div class="field">
+                <label for="email">Emaila</label>
+                <h:inputText id="email" value="#{registerBean.email}" required="true" styleClass="input" />
+                <h:message for="email" styleClass="msg" />
+            </div>
+
+            <div class="field">
+                <label for="password">Pasahitza</label>
+                <div class="pw-wrap">
+                    <h:inputSecret id="password" value="#{registerBean.password}" required="true" styleClass="input" redisplay="false" />
+                    <span class="pw-toggle" onclick="togglePw()">👁</span>
+                </div>
+                
+                <h:message for="password" styleClass="msg" />
+            </div>
+            <div class="field">
+			<label for="userType">Erabiltzaile Mota</label>
+                <h:selectOneMenu id="userType" value="#{registerBean.userType}" styleClass="input" style="height: 45px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+                    <f:selectItem itemValue="DRIVER" itemLabel="Gidaria (Driver)" />
+                    <f:selectItem itemValue="TRAVELER" itemLabel="Bidaiaria (Traveler)" />
+                    <f:selectItem itemValue="BOTH" itemLabel="Biak (Both)" />
+                </h:selectOneMenu>
+            </div>
+            
+            <h:commandButton value="Erregistratu" action="#{registerBean.register}" styleClass="btn" />
+			
+            <h:messages styleClass="msgs" />
+
+            <div class="login-link">
+                <a href="#{request.contextPath}/Login.xhtml">Dagoeneko kontua duzu? Saioa hasi →</a>
+            </div>
+
+        </h:form>
+    </div>
+
+    <script>
+        function togglePw(){
+            const input = document.querySelector('#registerForm\\:password_input, #registerForm\\:password');
+            if(input){
+                input.type = input.type === "password" ? "text" : "password";
+            }
+        }
+    </script>
+
+</h:body>
+</html>

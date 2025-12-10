@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title><ui:insert name="izenburua">Rides</ui:insert></title>
+
+    <!-- Hoja de estilos global (ULTRA.CSS) -->
+    <h:outputStylesheet library="css" name="ultra.css" />
+</h:head>
+
+<h:body class="body-bg">
+
+    <!-- Efecto de luz -->
+    <div class="glow"></div>
+
+    <!-- Contenedor general centrado -->
+    <div class="layout-container">
+
+        <!-- Header superior con logo -->
+        <header class="main-header">
+            <div class="logo-small">R</div>
+            <h2 class="app-title">Rides</h2>
+        </header>
+
+        <!-- Contenido dinámico -->
+        <main class="content-slot">
+            <ui:insert name="gorputza">Eduki gabe...</ui:insert>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <ui:insert name="orri-oina">
+                <p>© Software Ingeniaritza II</p>
+            </ui:insert>
+        </footer>
+
+    </div>
+
+</h:body>
+</html>

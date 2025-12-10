@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Nire Erreserbak</title>
+    <h:outputStylesheet library="css" name="ultra.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <style>
+        /* =========================================
+           ESTILO PREMIUM DARK (Mismo que BookRide)
+           ========================================= */
+        .body-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .full-screen-card {
+            max-width: none !important;
+            width: 95% !important;
+            height: 94vh !important;
+            margin: 3vh auto !important;
+            display: flex;
+            flex-direction: column;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .btn-secondary {
+            background: transparent !important;
+            border: 1px solid #475569 !important;
+            color: #cbd5e1 !important;
+            border-radius: 12px !important;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.05) !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+        
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15) !important;
+            border: 1px solid rgba(239, 68, 68, 0.3) !important;
+            color: #f87171 !important;
+            font-weight: bold !important;
+        }
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.3) !important;
+            color: #fff !important;
+        }
+
+        /* TABLA */
+        .table-container {
+            flex: 1;
+            background: #0f172a;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .my-table thead th {
+            background: #1e293b !important;
+            color: #94a3b8 !important;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 18px !important;
+            border: none !important;
+            border-bottom: 1px solid #334155 !important;
+        }
+
+        .my-table tbody tr {
+            background: transparent !important;
+            border: none !important;
+            border-bottom: 1px solid #1e293b !important;
+        }
+        
+        .my-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05) !important;
+        }
+
+        .my-table tbody td {
+            border: none !important;
+            padding: 15px 18px !important;
+            color: #e2e8f0;
+            vertical-align: middle;
+        }
+        
+        /* Estado Empty */
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: #64748b;
+        }
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+    </style>
+</h:head>
+
+<h:body styleClass="body-bg">
+
+    <div class="card full-screen-card">
+        
+        <h:form id="form" style="display: flex; flex-direction: column; height: 100%;">
+            <p:growl id="messages" showDetail="true" life="3000" />
+
+            <div class="header" style="flex-shrink: 0;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background: linear-gradient(135deg, #10b981, #059669); width:45px; height:45px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:22px; color:white; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
+                        <i class="pi pi-ticket" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <h2 style="margin: 0; color: #fff; font-size: 22px; font-weight: 700;">Nire Erreserbak</h2>
+                        <p style="margin: 0; color: #94a3b8; font-size: 13px; font-weight: 500;">Kudeatu zure bidaiak hemen.</p>
+                    </div>
+                </div>
+                
+                <p:commandButton value="Atzera" action="back" 
+                                 icon="pi pi-arrow-left"
+                                 styleClass="btn-secondary" 
+                                 style="width: auto; padding: 0 20px; height: 40px;" 
+                                 immediate="true"/>
+            </div>
+
+            <div class="table-container">
+                <p:dataTable id="bookingsTable" var="booking" value="#{queryReservationsBean.myBookings}" 
+                             rowKey="#{booking.bookingNumber}" 
+                             reflow="true"
+                             styleClass="my-table"
+                             scrollable="true" scrollHeight="100%">
+                    
+                    <f:facet name="emptyMessage">
+                        <div class="empty-state">
+                            <i class="pi pi-calendar-times empty-icon"></i>
+                            <p>Oraindik ez duzu bidaiarik erreserbatu.</p>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="Jatorria">
+                        <div style="font-weight:600; font-size:1.1em; color:#fff;">
+                            #{booking.ride.from}
+                        </div>
+                    </p:column>
+                    
+                    <p:column headerText="Helmuga">
+                        <div style="font-weight:600; font-size:1.1em; color:#fff;">
+                            #{booking.ride.to}
+                        </div>
+                    </p:column>
+                    
+                    <p:column headerText="Data" style="text-align:center;">
+    <div style="color:#94a3b8; font-weight:500;">
+        <h:outputText value="#{booking.ride.date}">
+            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" />
+        </h:outputText>
+    </div>
+</p:column>
+                    
+                    <p:column headerText="Plazak" style="text-align:center;">
+                         <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.9em;">
+                             #{booking.seats} pertsona
+                         </span>
+                    </p:column>
+
+                    <p:column headerText="Ordainduta" style="text-align:right;">
+                        <div style="color:#10b981; font-weight:800; font-size:1.2em;">
+                            #{booking.price} €
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Ekintzak" style="text-align:center; width: 120px;">
+                        <p:commandButton icon="pi pi-trash" 
+                                         action="#{queryReservationsBean.cancelBooking(booking)}"
+                                         update="bookingsTable :form:messages"
+                                         styleClass="btn-danger"
+                                         title="Ezeztatu erreserba">
+                            <p:confirm header="Ezeztatu" message="Ziur zaude erreserba hau ezeztatu nahi duzula?" icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350"
+                             style="background: #1e293b; color: #fff; border: 1px solid #475569;">
+                <p:commandButton value="Ez" type="button" styleClass="ui-confirmdialog-no btn-secondary" />
+                <p:commandButton value="Bai, ezeztatu" type="button" styleClass="ui-confirmdialog-yes btn-danger" />
+            </p:confirmDialog>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

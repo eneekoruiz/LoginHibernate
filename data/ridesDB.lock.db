@@ -1,0 +1,6 @@
+#FileLock
+#Wed Dec 10 10:39:06 CET 2025
+hostName=HP-Eneko
+id=19b07a0e328e268b0c0b79d32a7d277831eb29f4e08
+method=file
+server=192.168.56.1\:57341

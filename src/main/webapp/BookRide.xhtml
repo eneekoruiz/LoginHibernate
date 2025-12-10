@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Erreserbatu Bidaia</title>
+    <h:outputStylesheet library="css" name="ultra.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <style>
+        /* =========================================
+           ESTILO PREMIUM DARK eta MODERN
+           ========================================= */
+
+        /* FONDO PRINCIPAL CON DEGRADADO */
+        .body-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Evita scroll doble */
+        }
+
+        /* TARJETA PRINCIPAL */
+        .full-screen-card {
+            max-width: none !important;
+            width: 95% !important;
+            height: 94vh !important;
+            margin: 3vh auto !important;
+            display: flex;
+            flex-direction: column;
+            background: rgba(30, 41, 59, 0.7); /* Semitransparente moderno */
+            backdrop-filter: blur(10px); /* Efecto cristal */
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+        }
+
+        /* INPUTS MODERNOS (PILDORAS) */
+        .ui-inputfield, 
+        .ui-selectonemenu {
+            background: #0f172a !important;
+            border: 1px solid #334155 !important;
+            color: #fff !important;
+            border-radius: 12px !important; /* Bordes muy redondeados */
+            height: 48px !important;
+            padding-left: 15px !important;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
+        }
+
+        .ui-inputfield:focus, 
+        .ui-selectonemenu.ui-state-focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2) !important;
+            background: #1e293b !important;
+        }
+
+        /* Etiquetas */
+        .field label {
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* BOTONES */
+        .btn-primary {
+            background: linear-gradient(90deg, #2563eb, #3b82f6) !important;
+            border: none !important;
+            border-radius: 12px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.5px !important;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4) !important;
+            transition: transform 0.2s !important;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6) !important;
+        }
+
+        .btn-secondary {
+            background: transparent !important;
+            border: 1px solid #475569 !important;
+            color: #cbd5e1 !important;
+            border-radius: 12px !important;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.05) !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        /* TABLA ELEGANTE */
+        .table-container {
+            flex: 1;
+            background: #0f172a;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .my-table thead th {
+            background: #1e293b !important;
+            color: #94a3b8 !important;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 18px !important;
+            border: none !important;
+            border-bottom: 1px solid #334155 !important;
+        }
+
+        .my-table tbody tr {
+            background: transparent !important;
+            transition: background 0.2s;
+            border: none !important;
+            border-bottom: 1px solid #1e293b !important;
+        }
+        
+        /* Hover Fila */
+        .my-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.1) !important;
+            cursor: pointer;
+        }
+
+        .my-table tbody td {
+            border: none !important;
+            padding: 15px 18px !important;
+            color: #e2e8f0;
+            vertical-align: middle;
+        }
+
+        /* --- CLASE PARA FILAS LLENAS (MAGIC CSS) --- */
+        /* Si la fila tiene esta clase, se ve apagada y NO recibe clics */
+        .ride-full {
+            opacity: 0.4;
+            pointer-events: none; /* ESTO IMPIDE EL CLIC */
+            background: #151d2e !important;
+            filter: grayscale(100%);
+        }
+
+        /* DIALOGO (MODAL) */
+        .ui-dialog {
+            background: #1e293b !important;
+            border: 1px solid #475569 !important;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8) !important;
+            border-radius: 20px !important;
+        }
+        .ui-dialog-titlebar {
+            background: transparent !important;
+            border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+            padding: 20px !important;
+        }
+        .ui-dialog-title { font-size: 1.3rem !important; }
+        .ui-dialog-content { padding: 30px !important; }
+
+        /* BADGES (Etiquetas de estado) */
+        .badge {
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.85em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+        .badge-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* GRID HELPERS */
+        .search-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 180px;
+            gap: 20px;
+            align-items: end;
+            margin-bottom: 25px;
+        }
+    </style>
+</h:head>
+
+<h:body styleClass="body-bg">
+
+    <div class="card full-screen-card">
+        
+        <h:form id="mainForm" style="display: flex; flex-direction: column; height: 100%;">
+            <p:growl id="messages" showDetail="true" life="3000" />
+
+            <div class="header" style="flex-shrink: 0;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background: linear-gradient(135deg, #2563eb, #1d4ed8); width:45px; height:45px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:22px; color:white; box-shadow: 0 4px 10px rgba(37,99,235,0.5);">R</div>
+                    <div>
+                        <h2 style="margin: 0; color: #fff; font-size: 22px; font-weight: 700;">Erreserbatu Bidaia</h2>
+                        <p style="margin: 0; color: #94a3b8; font-size: 13px; font-weight: 500;">Aurkitu, aukeratu eta bidaiatu.</p>
+                    </div>
+                </div>
+                
+                <p:commandButton value="Atzera" action="back" 
+                                 icon="pi pi-arrow-left"
+                                 styleClass="btn-secondary" 
+                                 style="width: auto; padding: 0 20px; height: 40px;" 
+                                 immediate="true"/>
+            </div>
+
+            <div class="search-grid" style="flex-shrink: 0;">
+                <div class="field">
+                    <label>Jatorria</label>
+                    <div class="ui-input-icon-left" style="width: 100%;">
+                        <i class="pi pi-map-marker" style="z-index: 1; color: #94a3b8;"/>
+                        <p:selectOneMenu id="depart" value="#{bookRideBean.departCity}" style="width:100%; padding-left: 35px !important;">
+                            <f:selectItem itemLabel="Aukeratu hiria..." itemValue="" />
+                            <f:selectItems value="#{bookRideBean.departCities}" />
+                            <p:ajax listener="#{bookRideBean.updateArrivalCities}" update="arrival" />
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Helmuga</label>
+                    <div class="ui-input-icon-left" style="width: 100%;">
+                        <i class="pi pi-map-marker" style="z-index: 1; color: #94a3b8;"/>
+                        <p:selectOneMenu id="arrival" value="#{bookRideBean.arrivalCity}" style="width:100%; padding-left: 35px !important;">
+                            <f:selectItem itemLabel="Aukeratu hiria..." itemValue="" />
+                            <f:selectItems value="#{bookRideBean.arrivalCities}" />
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Data</label>
+                    <div class="ui-input-icon-left" style="width: 100%;">
+                        <i class="pi pi-calendar" style="z-index: 1; color: #94a3b8;"/>
+                        <p:calendar id="date" value="#{bookRideBean.date}" pattern="dd/MM/yyyy" 
+                                    showOn="button" inputStyleClass="input" 
+                                    readonlyInput="true" onkeydown="return false;" style="width: 100%"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <p:commandButton value="BILATU" action="#{bookRideBean.findRides}" 
+                                     icon="pi pi-search"
+                                     update="ridesTable messages" 
+                                     styleClass="btn-primary" 
+                                     style="width: 100%; height: 48px;"/>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <p:dataTable id="ridesTable" var="ride" value="#{bookRideBean.rides}" 
+                             selectionMode="single" selection="#{bookRideBean.selectedRide}" 
+                             rowKey="#{ride.rideNumber}" 
+                             emptyMessage="Ez dugu bidaiarik aurkitu irizpide horiekin."
+                             styleClass="my-table"
+                             scrollable="true" scrollHeight="100%"
+                             disabledSelection="#{ride.nPlaces eq 0}" 
+                             rowStyleClass="#{ride.nPlaces eq 0 ? 'ride-full' : null}">
+                    
+                    <p:ajax event="rowSelect" 
+                            update=":dialogForm:dialogContent" 
+                            oncomplete="PF('bookingDialog').show()" />
+
+                    <p:column headerText="Jatorria" sortBy="#{ride.from}" style="width:25%">
+                        <div style="font-weight:600; font-size:1.1em; color:#fff;">#{ride.from}</div>
+                    </p:column>
+                    
+                    <p:column headerText="Helmuga" sortBy="#{ride.to}" style="width:25%">
+                        <div style="font-weight:600; font-size:1.1em; color:#fff;">#{ride.to}</div>
+                    </p:column>
+                    
+                    <p:column headerText="Data" sortBy="#{ride.date}" style="width:20%; text-align:center;">
+                        <div style="color:#94a3b8; font-weight:500;">
+                            <h:outputText value="#{ride.date}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>
+                        </div>
+                    </p:column>
+                    
+                    <p:column headerText="Prezioa" sortBy="#{ride.price}" style="width:15%; text-align:right;">
+                        <div style="color:#60a5fa; font-weight:800; font-size:1.2em;">#{ride.price} €</div>
+                    </p:column>
+                    
+                    <p:column headerText="Egoera" style="width:15%; text-align:center;">
+                         <h:panelGroup rendered="#{ride.nPlaces > 0}">
+                             <span class="badge badge-success">#{ride.nPlaces} LEKU</span>
+                         </h:panelGroup>
+                         <h:panelGroup rendered="#{ride.nPlaces eq 0}">
+                             <span class="badge badge-danger">BETETA</span>
+                         </h:panelGroup>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form> 
+
+        <p:dialog header="Osatu Erreserba" widgetVar="bookingDialog" modal="true" 
+                  appendTo="@(body)" 
+                  showEffect="fade" hideEffect="fade" resizable="false" 
+                  responsive="true" width="450">
+            
+            <h:form id="dialogForm">
+                <h:panelGroup id="dialogContent">
+                    <h:panelGroup rendered="#{bookRideBean.selectedRide != null}">
+                        
+                        <div style="text-align:center; margin-bottom: 25px;">
+                            <div style="font-size: 1.5em; font-weight: 800; color: #fff; margin-bottom: 5px;">
+                                #{bookRideBean.selectedRide.from} <span style="color:#64748b; margin:0 5px;">➔</span> #{bookRideBean.selectedRide.to}
+                            </div>
+                            <div style="background: rgba(59, 130, 246, 0.15); display:inline-block; padding: 5px 15px; border-radius: 20px; color: #60a5fa; font-weight: bold; border: 1px solid rgba(59, 130, 246, 0.3);">
+                                Prezioa: #{bookRideBean.selectedRide.price} €
+                            </div>
+                        </div>
+
+                        <div class="ui-fluid">
+                            <div class="field" style="margin-bottom: 20px;">
+                                <label>Bidaiaria</label>
+                                <div class="ui-input-icon-left" style="width: 100%;">
+                                    <i class="pi pi-user" style="color: #94a3b8; z-index:1;" />
+                                    <p:inputText value="#{bookRideBean.travelerName}" 
+                                                 readonly="true" 
+                                                 style="background: #1e293b !important; border-color: #334155; color: #94a3b8; font-weight: 600; cursor: not-allowed;"/>
+                                </div>
+                            </div>
+
+                            <div class="field" style="margin-bottom: 30px;">
+                                <label>Plaza Kopurua</label>
+                                <p:spinner value="#{bookRideBean.seatsToBook}" min="1" max="#{bookRideBean.selectedRide.nPlaces}" 
+                                           readonlyInput="true" onkeydown="return false;"/>
+                            </div>
+
+                            <div style="display: flex; gap: 15px; margin-top: 10px;">
+                                <p:commandButton value="Utzi" 
+                                                 onclick="PF('bookingDialog').hide()"
+                                                 type="button"
+                                                 styleClass="btn-secondary" 
+                                                 style="flex: 1; height: 50px;" />
+
+                                <p:commandButton value="BAIEZTATU" action="#{bookRideBean.bookRide}" 
+                                                 update=":mainForm:messages :mainForm:ridesTable" 
+                                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('bookingDialog').hide()"
+                                                 styleClass="btn-primary"
+                                                 style="flex: 1; height: 50px; background: linear-gradient(90deg, #10b981, #059669) !important; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4) !important;" /> 
+                            </div>
+                        </div>
+
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </div>
+</h:body>
+</html>
