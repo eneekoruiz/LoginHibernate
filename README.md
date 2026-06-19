@@ -17,6 +17,10 @@ Ride-sharing web application built with JSF and Hibernate ORM.
 - Maven
 - H2
 
+## Architecture
+
+JSF pages bind to backing beans that coordinate authentication and ride-sharing actions. The business layer delegates persistence to Hibernate, keeping entity sessions and queries separate from view state.
+
 ## Links
 
 - DeepWiki: https://deepwiki.com/eneekoruiz/LoginHibernate
